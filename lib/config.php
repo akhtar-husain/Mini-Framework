@@ -14,18 +14,18 @@ if (version_compare(phpversion(), '5.4.0', '<') == true) {
 }
 
 const HOSTNAME = 'localhost';
-const DBNAME = 'admin_panel';
-const USERNAME = 'root';
-const PASSWORD = '467936';
-const DS = DIRECTORY_SEPARATOR;
+const DBNAME = 'YourDBName';
+const USERNAME = 'YourUserName';
+const PASSWORD = 'YourPassword';
 
+const DS = DIRECTORY_SEPARATOR;
 const ENVIRONMENT = 'development'; // OR production => live
 
 if( ENVIRONMENT == 'development' ){
 	error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
 }
 else{
-	error_reporting(-1);
+	error_reporting(0);
 }
 
 $basepath = realpath( dirname( dirname(__FILE__) ) );
@@ -55,11 +55,9 @@ else{
 	    	require_once BASEPATH . 'lib' . DS . $class . '.class.php';
 	    }
 	} );
-
 	/*
 	 * L O A D I N G   T A B L E   F I L E S 
 	 */
-
 	spl_autoload_register( function ($class) {
 	    if( file_exists(BASEPATH . 'lib' . DS . 'tables' . DS . $class . '.class.php') ){    	
 	    	require_once BASEPATH . 'lib' . DS . 'tables' . DS . $class . '.class.php';
