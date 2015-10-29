@@ -14,12 +14,12 @@ class DB
 	public $offset; 		// @integer
 	public $limit; 			// @integer
 	public $orderBy; 		// @Array as ['ID', 'ASC']
-	public $where; 		// WHERE Query
+	public $where; 			// WHERE Query
 	public $whereVal;
 	public $arrValues = array();		// @Array to bind with @params
 	
-	/*public $innerJoin; 		// Array as ['table'=>{tabl_name}, 'ON'=>'id']	
-	public $outerJoin;
+	public $innerJoin; 		// Array as ['table'=>{tabl_name}, 'ON'=>'id']	
+	/*public $outerJoin;
 	public $leftJoin;
 	public $rightJoin;*/ 	// Will	use later.
 
