@@ -198,6 +198,24 @@ class DB
 
 		$this->where .= implode(" ".$afterOpr." ", $param);
 	}
+	public function inWhere( $whereQuery = array(), $beforeOpr = 'AND' ){
+		if( empty($this->where) ){
+			$this->where = "WHERE "; 
+		}
+		else{
+			$this->where .= " ".$beforeOpr." ";
+		}
+		//$ar = [ 'id' => [1,2,3,4,5] ];
+		$param = array();
+		if( count($whereQuery) == 1 ){
+			foreach($whereQuery as $key => $val){
+				$param[] = $key." IN '%?%'";
+				$this->whereVal[] = "(".implode(',', $val).")";
+			}
+		}
+
+		$this->where .= implode(" ".$afterOpr." ", $param);
+	}
 
 	private function buildQuery( $sql )
 	{
