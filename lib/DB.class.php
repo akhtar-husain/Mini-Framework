@@ -1,7 +1,7 @@
 <?php
 
 /*
- * @author 	: 	Akhtar Husain <akhtar4660@gmail.com>
+ * @author  : Akhtar Husain <akhtar4660@gmail.com>
  * @package : 	Admin Panel
  * @version : 	1.0
  */
