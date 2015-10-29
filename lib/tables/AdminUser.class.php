@@ -36,7 +36,6 @@ final public class AdminUser extends Auth
    */
 	function __construct($var=0)
 	{
-		parent::__construct();
 		if($var>0)
 		{
 			$db = new DB();
