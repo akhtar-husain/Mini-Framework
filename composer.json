@@ -1,0 +1,15 @@
+{
+    "name": "PDO Library",
+    "description": "The PDO 5.6 Framework.",
+    "keywords": ["Library", "PHP Library"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
