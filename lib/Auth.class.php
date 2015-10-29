@@ -6,8 +6,9 @@
  * @version : 	1.0
  */
 
-public class Auth
+public abstract class Auth
 {
+	//protected function initialize();
 	public function login(){
 		$pass = new Password( $this->password );
 		$db = new DB();
