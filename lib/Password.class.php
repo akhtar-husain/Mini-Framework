@@ -10,21 +10,34 @@ final class Password
 {
 	public $hash;
 	public $password;
+	public $options;
 
-	public function __construct( $password = '' ){
-		if($password != ''){
-			$this->hash = self::hashPassword($password);
+	public function __construct( $password = '' ){		
+		if($password == ''){
+			return;
 		}
 		$this->password = $password;
+		$this->options = ['salt' => self::uniqueSalt(), 'cost' => 10];
+		if($password != ''){
+			$this->hash = self::hashPassword();
+		}
 	}
 
-	public final function unique_salt() {
+	public final function uniqueSalt() {
 		return substr(sha1(uniqid(mt_rand(), true)), 0, 22);
 	}
 
-	public function hashPassword($password){
-		$options = ['salt' => self::unique_salt(), 'cost' => 10];
-		$hash = password_hash($password, PASSWORD_DEFAULT, $options);
+	public function hashPassword(){		
+		$hash = password_hash($this->password, PASSWORD_DEFAULT, $this->options);
+		return $hash;
+	}
+	public function needRehash(){
+		if( password_needs_rehash($this->hash, PASSWORD_DEFAULT, $this->options) ){
+			return TRUE;
+		}
+	}
+	public function reHashPassword(){		
+		$hash = password_hash($this->password, PASSWORD_DEFAULT, $this->options);
 		return $hash;
 	}
 

@@ -6,7 +6,7 @@
  * @version : 	1.0
  */
 
-class AdminUser
+final public class AdminUser extends Auth
 {
   /////////////////////////////////////////////////
   // PROPERTIES, PUBLIC
@@ -36,6 +36,7 @@ class AdminUser
    */
 	function __construct($var=0)
 	{
+		parent::__construct();
 		if($var>0)
 		{
 			$db = new DB();
