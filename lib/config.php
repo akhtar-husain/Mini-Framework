@@ -46,22 +46,26 @@ define( 'CURRENT_PAGE', $curPage );
  * ========== I N C L U D E   N E C E S S A R Y   F I L E S ===========
  *
  */
+if( file_exists(BASEPATH . 'vendor') ){
+	require_once BASEPATH ."vendor/autoload.php";
+}
+else{
+	spl_autoload_register( function ($class) {
+	    if( file_exists(BASEPATH . 'lib' . DS . $class . '.class.php') ){    	
+	    	require_once BASEPATH . 'lib' . DS . $class . '.class.php';
+	    }
+	} );
 
-spl_autoload_register( function ($class) {
-    if( file_exists(BASEPATH . 'lib' . DS . $class . '.class.php') ){    	
-    	require_once BASEPATH . 'lib' . DS . $class . '.class.php';
-    }
-} );
+	/*
+	 * L O A D I N G   T A B L E   F I L E S 
+	 */
 
-/*
- * L O A D I N G   T A B L E   F I L E S 
- */
-
-spl_autoload_register( function ($class) {
-    if( file_exists(BASEPATH . 'lib' . DS . 'tables' . DS . $class . '.class.php') ){    	
-    	require_once BASEPATH . 'lib' . DS . 'tables' . DS . $class . '.class.php';
-    }
-} );
-require_once BASEPATH . "lib" . DS . "functions.php";
+	spl_autoload_register( function ($class) {
+	    if( file_exists(BASEPATH . 'lib' . DS . 'tables' . DS . $class . '.class.php') ){    	
+	    	require_once BASEPATH . 'lib' . DS . 'tables' . DS . $class . '.class.php';
+	    }
+	} );
+	require_once BASEPATH . "lib" . DS . "functions.php";
+}
 
 /** =========== F I L E   L O A D I N G   E N D S   H E R E  =========== **/

@@ -1,4 +1,5 @@
 <?php
+namespace App\Pagination;
 
 /*
  * @author 	: 	Akhtar Husain <akhtar4660@gmail.com>
