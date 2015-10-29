@@ -1,7 +1,7 @@
 <?php
 namespace App\Auth;
-use App\DB as DB;
-use App\Password as Password;
+use App\DB, App\Password;
+
 /*
  * @author 	: 	Akhtar Husain <akhtar4660@gmail.com>
  * @package : 	Admin Panel
