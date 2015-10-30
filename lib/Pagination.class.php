@@ -1,5 +1,5 @@
 <?php
-
+defined("BASEPATH") OR die("File access not allowed");
 /*
  * @author 	: 	Akhtar Husain <akhtar4660@gmail.com>
  * @package : 	Admin Panel

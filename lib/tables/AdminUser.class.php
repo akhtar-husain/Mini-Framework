@@ -6,7 +6,7 @@
  * @version : 	1.0
  */
 
-final public class AdminUser extends Auth
+final class AdminUser extends Auth
 {
   /////////////////////////////////////////////////
   // PROPERTIES, PUBLIC

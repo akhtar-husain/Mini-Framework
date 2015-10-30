@@ -1,7 +1,7 @@
 <?php
-
+defined("BASEPATH") OR die("File access not allowed");
 /*
- * @author  : Akhtar Husain <akhtar4660@gmail.com>
+ * @author  : 	Akhtar Husain <akhtar4660@gmail.com>
  * @package : 	Admin Panel
  * @version : 	1.0
  */
@@ -209,8 +209,7 @@ class DB
 		$param = array();
 		if( count($whereQuery) == 1 ){
 			foreach($whereQuery as $key => $val){
-				$param[] = $key." IN '%?%'";
-				$this->whereVal[] = "(".implode(',', $val).")";
+				$param[] = $key." IN "."(".implode(',', $val).")";
 			}
 		}
 

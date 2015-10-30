@@ -1,5 +1,5 @@
 <?php
-
+defined("BASEPATH") OR die("File access not allowed");
 /*
  * @author 	: 	Akhtar Husain <akhtar4660@gmail.com>
  * @package : 	Admin Panel
@@ -35,6 +35,8 @@ final class Password
 		if( password_needs_rehash($this->hash, PASSWORD_DEFAULT, $this->options) ){
 			return TRUE;
 		}
+		else
+			return FALSE;
 	}
 	public function reHashPassword(){		
 		$hash = password_hash($this->password, PASSWORD_DEFAULT, $this->options);

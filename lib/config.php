@@ -6,7 +6,6 @@
  * @version : 	1.0
  */
 
-ob_start();
 session_start();
 
 if (version_compare(phpversion(), '5.4.0', '<') == true) {
@@ -63,5 +62,6 @@ spl_autoload_register( function ($class) {
     }
 } );
 require_once BASEPATH . "lib" . DS . "functions.php";
+require_once BASEPATH . "lib" . DS . "mimes.php";
 
 /** =========== F I L E   L O A D I N G   E N D S   H E R E  =========== **/
