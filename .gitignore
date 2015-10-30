@@ -1,3 +1,5 @@
 /vendor
+/uploads
 /composer.lock
 /test.php
+/index.php
