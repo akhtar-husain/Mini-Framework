@@ -1,33 +1,28 @@
 <?php
-require "lib/Config.php";
-//use App;
-use App\DB;
-use App\Tables\AdminUser;
-use App\Upload;
+require_once "app/Config.php";
+$exceptPages = ['login','error', 'forget'];
 
-echo BASEURL."<br/>".BASEPATH;
+$page = isset($_REQUEST['page']) ? basename($_REQUEST['page'], ".php") : "index";
+$title = ($page != "index") ? ucwords($page) : "Admin";
 
-$db = new DB();
-
-echo "<br>Password: ".$func->generateKey();
+if( ! in_array($page, $exceptPages) ){
+    include_once BASEPATH."pages".DS."header.php";
+    include_once BASEPATH."pages".DS."sidebar.php";
+}
 ?>
-<fieldset><legend>Admin</legend>
+    <!-- Content -->
 <?php
-$admin = new AdminUser(1);
-_print_r($admin);
+if( is_file(BASEPATH."pages".DS.$page.".php") ){
+    include_once BASEPATH."pages".DS.$page.".php";
+}
+else{
+    include_once BASEPATH."pages".DS."index.php";
+}
 ?>
-</fieldset>
-
-<fieldset><legend>Upload</legend>
+    <!-- /Content -->
+    <!-- Footer -->
 <?php
-//$upload = new Upload('D:\office work\New folder\Mirchi-Murga.webm');
-$config['max_size'] = 1048576;
-$config['max_width'] = 1024;
-$config['max_height'] = 768;
-
-$upload = new Upload('robot.png',);
-//_print_r($upload);
-$upload->doUpload();
+if( ! in_array($page, $exceptPages) ){
+    include_once BASEPATH."pages".DS."footer.php";
+}
 ?>
-</fieldset>
-

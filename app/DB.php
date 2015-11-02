@@ -44,37 +44,47 @@ class DB
 	 *
 	 */
 
-	public function getResult($table, $fields)
+	public function getResult($table, $fields="*")
 	{
 		if( empty($table) )
 			return;
-		
+
 		$field = is_array($fields) ? implode(', ', $fields) : "*";
-		
+
 		$sql = "SELECT ".$field." FROM `".$table."` ";
 		$this->query = self::buildQuery($sql);
 
-		$stmt = $this->dbh->prepare($this->query);
-		$stmt->execute( $this->arrValues );		// ? '' : "ERROR ".$this->dbh->errorInfo();
-		$data =  $stmt->fetchAll(PDO::FETCH_OBJ);
+		try{
+			$stmt = $this->dbh->prepare($this->query);
+			$stmt->execute( $this->arrValues );		// ? '' : "ERROR ".$this->dbh->errorInfo();
+			$data =  $stmt->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(PDO_Exception $e){
+			$e->getMessage();
+		}
 		//print_r($data);
 		self::reset();
 		return $data;
 	}
-	
-	public function getRow($table, $fields)
+
+	public function getRow($table, $fields="*")
 	{
 		if( empty($table) )
 			return;
-		
+
 		$field = is_array($fields) ? implode(', ', $fields) : "*";
-		
+
 		$sql = "SELECT ".$field." FROM `".$table."` ";
 		$this->query = self::buildQuery($sql);
 
-		$stmt = $this->dbh->prepare($this->query);
-		$stmt->execute( $this->arrValues );		// ? '' : "ERROR ".$this->dbh->errorInfo();
-		$data =  $stmt->fetch(PDO::FETCH_OBJ);		
+		try{
+			$stmt = $this->dbh->prepare($this->query);
+			$stmt->execute( $this->arrValues );		// ? '' : "ERROR ".$this->dbh->errorInfo();
+			$data =  $stmt->fetch(PDO::FETCH_OBJ);
+		}
+		catch(PDO_Exception $e){
+			$e->getMessage();
+		}
 
 		self::reset();
 		return $data;
@@ -84,8 +94,8 @@ class DB
 	public function insert($table, $fieldVal)
 	{
 		/*
-		 * $fieldVal is an associative array containing as 
-		 * $key=>$val , Where key = column name of table 
+		 * $fieldVal is an associative array containing as
+		 * $key=>$val , Where key = column name of table
 		 */
 
 		if( !is_array($fieldVal) || empty($table) )
@@ -98,17 +108,47 @@ class DB
 			$fields[] = $key."=?";
 			$arrValues[] = $val;
 		}
-		
-		$sql .= implode(", ", $fields);
-		$stmt = $this->dbh->prepare($sql);
-		return $stmt->execute($arrValues) ? $this->dbh->lastInsertId() : FALSE;
+
+		try{
+			$sql .= implode(", ", $fields);
+			$stmt = $this->dbh->prepare($sql);
+			return $stmt->execute($arrValues) ? $this->dbh->lastInsertId() : FALSE;
+		}
+		catch(PDO_Exception $e){
+			$e->getMessage();
+		}
+	}
+	public function batchInsert($table, $fieldNames=array(), $fieldValues=array())
+	{
+		if( !is_array($fieldValues) || ! is_array($fieldNames) || empty($table) )
+			return;
+
+		$arrValues = array();
+		$sql = "INSERT INTO `".$table."` ( ".implode(", ", $fieldNames)." ) VALUES ";
+		foreach( $fieldValues as $values){
+			$val1 = array();
+			foreach($values as $val){
+				$val1[] = "'".$val."'";
+			}
+			$arrValues[] = "( ".implode(", ", $val1)." )";
+		}
+
+		try{
+			$sql .= implode(", ", $arrValues);
+			$stmt = $this->dbh->prepare($sql);
+			//_print_r($sql);
+			return $stmt->execute() ? TRUE : FALSE;
+		}
+		catch(PDO_Exception $e){
+			$e->getMessage();
+		}
 	}
 
 	public function update($table, $fieldVal)
 	{
 		/*
-		 * $fieldVal is an associative array containing as 
-		 * $key=>$val , Where key = column name of table 
+		 * $fieldVal is an associative array containing as
+		 * $key=>$val , Where key = column name of table
 		 */
 		if( !is_array($fieldVal) || empty($table) )
 			return;
@@ -119,17 +159,22 @@ class DB
 			$fields[] = $key."=?";
 			$this->arrValues[] = $val;
 		}
-		
+
 		$sql .= implode(", ", $fields);
 		$this->query = self::buildQuery($sql);
 
-		$stmt = $this->dbh->prepare($this->query);
-		$res = $stmt->execute($this->arrValues);
-		
+		try{
+			$stmt = $this->dbh->prepare($this->query);
+			$res = $stmt->execute($this->arrValues);
+		}
+		catch(PDO_Exception $e){
+			$e->getMessage();
+		}
+
 		self::reset();
 		return $res;
 	}
-	
+
 	public function delete( $table )
 	{
 		if( empty($table) )
@@ -138,13 +183,18 @@ class DB
 		$sql = "DELETE FROM `".$table."`";
 		$this->query = self::buildQuery($sql);
 
-		$stmt = $this->dbh->prepare($this->query);
-		$res = $stmt->execute($this->arrValues);
+		try{
+			$stmt = $this->dbh->prepare($this->query);
+			$res = $stmt->execute($this->arrValues);
+		}
+		catch(PDO_Exception $e){
+			$e->getMessage();
+		}
 
 		self::reset();
 		return $res;
 	}
-	
+
 	public function getCount( $table, $field )
 	{
 		if( empty($table) )
@@ -199,7 +249,7 @@ class DB
 
 		$this->where .= implode(" ".$afterOpr." ", $param);
 	}
-	public function inWhere( $whereQuery = array(), $beforeOpr = 'AND' ){
+	public function inWhere( $whereQuery = array(), $beforeOpr = 'AND', $afterOpr="AND" ){
 		if( empty($this->where) ){
 			$this->where = "WHERE "; 
 		}
@@ -232,7 +282,7 @@ class DB
 		$query .= !empty($this->limit) ? " LIMIT ".$this->limit." " : "";
 		$query .= !empty($this->offset) ? " OFFSET ".$this->offset." " : "";
 		
-		Functions::showQuery($query,$this->arrValues);		
+		//Functions::showQuery($query,$this->arrValues);
 		return $query;
 	}
 

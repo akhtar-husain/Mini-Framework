@@ -116,7 +116,7 @@ class Functions
 	/*
 	 * Function to generate a random number.
 	 */
-	static function _rand( $min = 0, $max = 0 ) {
+	static function _rand( $min = 111111, $max = 999999 ) {
 		$rnd_value='';
 
 		if ( strlen($rnd_value) < 8 ) {

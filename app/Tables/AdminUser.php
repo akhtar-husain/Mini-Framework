@@ -41,6 +41,7 @@ final class AdminUser extends Auth
 		if($var>0)
 		{
 			$db = new DB();
+			$db->where(['id' => $var]);
 			$obj = $db->getRow( $this->table, '*' );
 
 			if(is_object($obj))
@@ -85,7 +86,7 @@ final class AdminUser extends Auth
 	function update()
 	{
 		$db = new DB();
-		$pass = new Password( md5($this->password) );
+		$pass = new Password( $this->password );
 
 		$fieldSet = ['display_name' => $this->display_name, 'email' => $this->email, 'password' => $pass->password, 'hash' => $pass->hash, 'updated_on' => date('Y-m-d H:i:s')];
 		$db->where( ['id'=>$this->id] );
@@ -100,7 +101,7 @@ final class AdminUser extends Auth
 	function add()
 	{
 		$db = new DB();
-		$pass = new Password( md5($this->password) );
+		$pass = new Password( $this->password );
 
 		$fieldSet = ['username' => $this->username, 'email' => $this->email, 'password' => $pass->password, 'hash' => $pass->hash, 'display_name' => $this->display_name, 'updated_on' => date('Y-m-d H:i:s'), 'status'=>'1'];
 		$id = $db->insert( $this->table, $fieldSet );

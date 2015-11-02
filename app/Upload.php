@@ -1,6 +1,6 @@
 <?php
 namespace App;
-use App\Image;
+use App\Image, App\Functions;
 
 class Upload
 {	
@@ -65,10 +65,10 @@ class Upload
 	{
 		$ext = pathinfo($this->file['name'], PATHINFO_EXTENSION);
 		if( in_array( $this->fileType, ['image', 'audio', 'video'] ) ){
-			$fileName = time().rand(0,10).".".$ext;
+			$fileName = date("Ymd_His").Functions::_rand().".".$ext;
 			$targetFile = $this->dir.$fileName;
 			if( move_uploaded_file($this->file['tmp_name'], $targetFile) ){
-				if( $this->fileType == 'image' ){
+				if( $this->fileType == 'image' && $this->file['name'] !== 'site_logo' ){
 					$image = new Image( $targetFile );
 
 					$image->load($targetFile);
@@ -83,7 +83,7 @@ class Upload
 			return $fileName;
 		}
 		else{
-			$fileName = time().rand(0,10).".".$ext;
+			$fileName = date("Ymd_His").Functions::_rand().".".$ext;
 			$targetFile = $this->dir.$fileName;
 			if( move_uploaded_file($this->file['tmp_name'], $targetFile) ){
 				return $fileName;
