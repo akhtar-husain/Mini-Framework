@@ -17,7 +17,7 @@ class Upload
 	public function __construct($file, $config="")
 	{
 		// 1MB = 1048576 KB.
-		include_once BASEPATH."lib".DS."Mimes.php";
+		include_once BASEPATH."app".DS."Mimes.php";
 		if( !empty($file) ){
 			$this->file = $file;
 			$this->config = $config;
@@ -68,7 +68,7 @@ class Upload
 			$fileName = date("Ymd_His").Functions::_rand().".".$ext;
 			$targetFile = $this->dir.$fileName;
 			if( move_uploaded_file($this->file['tmp_name'], $targetFile) ){
-				if( $this->fileType == 'image' && $this->file['name'] !== 'site_logo' ){
+				if( $this->fileType == 'image' ){
 					$image = new Image( $targetFile );
 
 					$image->load($targetFile);
@@ -90,5 +90,6 @@ class Upload
 			}
 		}
 	}
+
 
 }

@@ -14,6 +14,7 @@ class Image
     function load($filename)
     {
         $image_info       = getimagesize($filename);
+        //_print_r($image_info);
         $this->image_type = $image_info[2];
         if ($this->image_type == IMAGETYPE_JPEG) {
             $this->image = imagecreatefromjpeg($filename);

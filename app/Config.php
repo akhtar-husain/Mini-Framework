@@ -17,8 +17,8 @@ const KEY = 'qwertyuiopASDFGHJKLzxcvbnm!@#$%^&*87654321';
 const ENVIRONMENT = 'development'; // OR production => live
 
 if( ENVIRONMENT == 'development' ){
-	//error_reporting(-1);
-	error_reporting(E_ALL & E_WARNING & E_NOTICE);
+	error_reporting(-1);
+	//error_reporting(E_ALL & E_WARNING & E_NOTICE);
 }
 else{
 	error_reporting(0);
