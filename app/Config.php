@@ -10,7 +10,7 @@ session_start();
 const HOSTNAME = 'localhost';
 const DBNAME = 'admin_panel';
 const USERNAME = 'root';
-const PASSWORD = '467936';
+const PASSWORD = '';
 
 const DS = DIRECTORY_SEPARATOR;
 const KEY = 'qwertyuiopASDFGHJKLzxcvbnm!@#$%^&*87654321';
@@ -28,7 +28,7 @@ $basepath = realpath( dirname( dirname(__FILE__) ) );
 $httpProt = isset($_SERVER['https']) ? 'https://' : 'http://';
 //$baseurl = $httpProt.$_SERVER['HTTP_HOST'].str_replace(DS, '/', strrchr($basepath, DS)).'/';
 
-$baseurl = str_replace(basename($_SERVER['REQUEST_URI']), "", $_SERVER['REQUEST_URI']);
+$baseurl = strstr($_SERVER['REQUEST_URI'], '?') != "" ? str_replace(basename($_SERVER['REQUEST_URI']), "", $_SERVER['REQUEST_URI']) : $_SERVER['REQUEST_URI'];
 $baseurl = $httpProt.$_SERVER['HTTP_HOST'].$baseurl;
 
 $basepath = $basepath.DS;
