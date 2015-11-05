@@ -8,7 +8,7 @@ use App\System\DB, App\System\Password;
  * @version : 	1.0
  */
 
-class Auth
+abstract class Auth
 {
 	//protected function initialize();
 	public function login(){
