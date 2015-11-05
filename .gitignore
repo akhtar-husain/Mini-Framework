@@ -1,4 +1,10 @@
 /vendor
 /uploads
 /.idea
+/templates
+/cache
+
+/index.php
 /composer.lock
+/test.php
+/index-old.php

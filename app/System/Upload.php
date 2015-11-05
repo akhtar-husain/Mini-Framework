@@ -1,6 +1,6 @@
 <?php
-namespace App;
-use App\Image, App\Functions;
+namespace App\System;
+use App\System\Image, App\System\Functions;
 
 class Upload
 {	
@@ -17,7 +17,7 @@ class Upload
 	public function __construct($file, $config="")
 	{
 		// 1MB = 1048576 KB.
-		include_once BASEPATH."app".DS."Mimes.php";
+		include_once BASEPATH."app".DS."System".DS."Mimes.php";
 		if( !empty($file) ){
 			$this->file = $file;
 			$this->config = $config;

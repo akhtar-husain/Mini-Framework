@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\System;
 use PDO;
 /*
  * @author  : Akhtar Husain <akhtar4660@gmail.com>

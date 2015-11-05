@@ -26,10 +26,7 @@ else{
 
 $basepath = realpath( dirname( dirname(__FILE__) ) );
 $httpProt = isset($_SERVER['https']) ? 'https://' : 'http://';
-//$baseurl = $httpProt.$_SERVER['HTTP_HOST'].str_replace(DS, '/', strrchr($basepath, DS)).'/';
-
-$baseurl = strstr($_SERVER['REQUEST_URI'], '?') != "" ? str_replace(basename($_SERVER['REQUEST_URI']), "", $_SERVER['REQUEST_URI']) : $_SERVER['REQUEST_URI'];
-$baseurl = $httpProt.$_SERVER['HTTP_HOST'].$baseurl;
+$baseurl = $httpProt.$_SERVER['HTTP_HOST'].'/'.substr( $_SERVER['REQUEST_URI'], strpos( $_SERVER['REQUEST_URI'], '/')+1, strrpos($_SERVER['REQUEST_URI'], '/') );
 
 $basepath = $basepath.DS;
 $curPage = basename($_SERVER['SCRIPT_NAME'], '.php');

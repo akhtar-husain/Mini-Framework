@@ -1,6 +1,6 @@
 <?php
-namespace App;
-use App\DB, App\Password;
+namespace App\System;
+use App\System\DB, App\System\Password;
 
 /*
  * @author 	: 	Akhtar Husain <akhtar4660@gmail.com>

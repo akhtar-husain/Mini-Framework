@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\System;
 /*
  * @author 	: 	Akhtar Husain <akhtar4660@gmail.com>
  * @package : 	Admin Panel
