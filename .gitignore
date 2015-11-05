@@ -4,7 +4,7 @@
 /templates
 /cache
 
-/index.php
-/composer.lock
-/test.php
-/index-old.php
+index.php
+index-old.php
+composer.lock
+test.php
