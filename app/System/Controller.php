@@ -8,8 +8,7 @@ abstract class Controller
 		/*-------------- Initialize Twig Template Engine -----------------*/
 		Twig_Autoloader::register();
 		$loader = new Twig_Loader_Filesystem('Views');
-		$twig = new Twig_Environment($loader);
-		$twig = new Twig_Environment($loader, (ENVIRONMENT == 'production') ? array('cache' => 'cache') : array() );
+		$this->twig = new Twig_Environment($loader, (ENVIRONMENT == 'production') ? array('cache' => 'cache') : array() );
 	}
 
 	/*-------------- FUNCTION TO LOAD VIEW -----------------*/

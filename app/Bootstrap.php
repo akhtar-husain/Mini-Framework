@@ -49,14 +49,3 @@ else{
 	exit("Autoload file does not exists. Please try to regenerate autoload file using command `composer dump-autoload`");
 }
 /** =========== F I L E   L O A D I N G   E N D S   H E R E  =========== **/
-function _print_r($var)
-{
-	if( empty($var) )
-		return false;
-		
-	print "<fieldset style=\"border: 1px solid black; font:12px 'Courier new',monospace; padding:10px; margin:10px 0;\">";
-	print "<pre>";
-	print_r($var);
-	print "</pre>";
-	print "</fieldset>";
-}
