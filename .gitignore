@@ -4,7 +4,6 @@
 /templates
 /cache
 
-index.php
 index-old.php
 composer.lock
 test.php
