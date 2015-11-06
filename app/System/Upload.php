@@ -1,6 +1,6 @@
 <?php
 namespace App\System;
-use App\System\Image, App\System\Functions;
+use App\System\Image, App\System\Helpers;
 
 class Upload
 {	
@@ -14,11 +14,12 @@ class Upload
 	public $thumb1 = BASEPATH."uploads".DS."media".DS."thumb1".DS;
 	public $thumb2 = BASEPATH."uploads".DS."media".DS."thumb2".DS;	
 
-	public function __construct($file, $config="")
+	public function __construct($file, $config = array())
 	{
 		// 1MB = 1048576 KB.
-		include_once BASEPATH."app".DS."System".DS."Mimes.php";
+		
 		if( !empty($file) ){
+			include_once BASEPATH."app".DS."System".DS."Mimes.php";
 			$this->file = $file;
 			$this->config = $config;
 
@@ -37,7 +38,7 @@ class Upload
 			}
 			$type = explode('/', $this->info['mime']);
 			$this->fileType = strtolower($type[0]);
-			if( $this->fileType == "image" )
+			if( $this->fileType == "image" || $this->fileType == 'video' )
 			{
 				$info = getimagesize($file['tmp_name']);
 				$this->info['width'] = $info[0];
@@ -64,9 +65,27 @@ class Upload
 	public function doUpload()
 	{
 		$ext = pathinfo($this->file['name'], PATHINFO_EXTENSION);
+		if( $this->info['bits'] > $this->config['max_size'] ){
+			return "File size exceeded";
+		}
+
 		if( in_array( $this->fileType, ['image', 'audio', 'video'] ) ){
-			$fileName = date("Ymd_His").Functions::_rand().".".$ext;
+			$fileName = date("Ymd_His")._rand().".".$ext;
 			$targetFile = $this->dir.$fileName;
+
+			if( is_array($this->config) )
+			{				
+				if( $this->fileType == 'image' || $this->fileType == 'video' )
+				{
+					if( $this->info['width'] > $this->config['max_width'] ){
+						return "File width exceeded";
+					}
+					if( $this->info['height'] > $this->config['max_height'] ){
+						return "File height exceeded";
+					}
+				}
+			}
+
 			if( move_uploaded_file($this->file['tmp_name'], $targetFile) ){
 				if( $this->fileType == 'image' ){
 					$image = new Image( $targetFile );
@@ -79,11 +98,12 @@ class Upload
 					$image->resizeToWidth(150);
 					$image->save($this->thumb2.$fileName);
 				}
+				return $fileName;
 			}
-			return $fileName;
+			
 		}
 		else{
-			$fileName = date("Ymd_His").Functions::_rand().".".$ext;
+			$fileName = date("Ymd_His")._rand().".".$ext;
 			$targetFile = $this->dir.$fileName;
 			if( move_uploaded_file($this->file['tmp_name'], $targetFile) ){
 				return $fileName;

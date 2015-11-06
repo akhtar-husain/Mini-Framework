@@ -3,6 +3,14 @@
     "description": "The PDO 5.6 Framework.",
     "keywords": ["PHP Library", "PHP Library"],
     "type": "project",
+    "authors": [
+        {
+            "name": "Akhtar Husain",
+            "email": "akhtar4660@gmail.com",
+            "homepage": "https://akhtar-husain.branded.me",
+            "role": "Lead Developer"
+        }
+    ],
     "require": {
         "php": ">=5.4"
     },

@@ -5,8 +5,9 @@ abstract class Controller
 {
 	public $twig;
 	function __construct(){
+		
 		/*-------------- Initialize Twig Template Engine -----------------*/
-		$mail = new \PHPMailer();
+		
 		Twig_Autoloader::register();
 		$loader = new \Twig_Loader_Filesystem(DIR_VIEW);
 		$this->twig = new \Twig_Environment($loader, (ENVIRONMENT == 'production') ? array('cache' => 'cache') : array() );
@@ -27,11 +28,8 @@ abstract class Controller
 
 	/*-------------- FUNCTION TO LOAD MODEL -----------------*/
 	public function loadModel($model){
-		if( ! is_array($data) ){
-			return;
+		if( file_exists(DIR_MODEL . $model . '.php') ){
+			require_once DIR_MODEL . $model . '.php';
 		}
-
-		$template = $this->twig->loadTemplate($template);
-		$template->display($data);
 	}
 }

@@ -7,11 +7,6 @@
 ob_start();
 session_start();
 
-const HOSTNAME = 'localhost';
-const DBNAME = 'admin_panel';
-const USERNAME = 'root';
-const PASSWORD = '';
-
 const DS = DIRECTORY_SEPARATOR;
 
 if( ENVIRONMENT == 'development' ){
