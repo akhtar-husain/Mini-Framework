@@ -1,4 +1,4 @@
-# PDO-Library
+# PHP-PDO-Mini Framework
 Simple PHP Mini Framework with PDO and PHP 5.6.0. 
 
 -- To load files automatically PSR 4 autoloading is used.
