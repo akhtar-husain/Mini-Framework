@@ -34,6 +34,10 @@ $curPage = basename($_SERVER['SCRIPT_NAME'], '.php');
 define( 'BASEPATH', $basepath );
 define( 'BASEURL', $baseurl );
 define( 'CURRENT_PAGE', $curPage );
+
+const DIR_CONTROLLER = BASEPATH . 'Controllers' . DS;
+const DIR_MODEL = BASEPATH . 'Models' . DS;
+const DIR_VIEW = BASEPATH . 'Views' . DS;
 /** ========== C O N S T A N T   E N D S   H E R E ============ **/
 
 /**
@@ -42,7 +46,6 @@ define( 'CURRENT_PAGE', $curPage );
  *
  */
 if( file_exists(BASEPATH . 'vendor'.DS.'autoload.php') ){
-	//require BASEPATH ."vendor/autoload.php";
 	require BASEPATH . 'vendor'.DS.'autoload.php';
 }
 else{
