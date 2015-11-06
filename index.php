@@ -6,9 +6,21 @@
 
 const DEFAULT_CONTROLLER = "Default_Controller";
 
+
+
 /*---------- SET ERROR DOCUMENT THAT IS USED AS 404 ERROR ---------------*/
 
 const ERROR_DOCUMENT = "404.html";
+
+
+
+/*---------- SET ERROR DOCUMENT THAT IS USED AS 404 ERROR
+ *			 TRUE => USE TWIG TEMPLATE ENGINE FOR VIEW FILES
+ *			 FALSE => USE .php EXTENSION FOR VIEW FILES
+ *---------------*/
+
+const USE_TEMPLATE = TRUE; 
+
 
 
 /*---------- SET ENCRYPTION KEY THAT WILL BE USED TO ENCRYPT CONFIDENTIAL DATA
@@ -18,9 +30,15 @@ const ERROR_DOCUMENT = "404.html";
 const KEY = 'qwertyuiopASDFGHJKLzxcvbnm!@#$%^&*87654321';
 
 
-/*---------- SETTINGS WILL BE APPPLIED BASED ON THE ENVIRONMENT ---------------*/
 
-const ENVIRONMENT = 'development'; // OR production => live
+/*---------- SETTINGS WILL BE APPPLIED BASED ON THE ENVIRONMENT
+ *			 ENVIRONMENT => development
+ *			 OR ENVIRONMENT => production
+ * ---------------*/
+
+const ENVIRONMENT = ''; // OR production => live
+
+
 
 /*---------- SET DB DETAILS ---------------*/
 

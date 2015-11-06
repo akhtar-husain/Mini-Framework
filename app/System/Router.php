@@ -1,8 +1,6 @@
 <?php
 namespace App\System;
 
-use \App\Controllers;
-
 class Router
 {	
 	protected $controller;
