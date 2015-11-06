@@ -1,14 +1,16 @@
 <?php
 namespace App\System;
-
+use Twig_Autoloader;
 abstract class Controller
 {
 	public $twig;
 	function __construct(){
 		/*-------------- Initialize Twig Template Engine -----------------*/
+		$mail = new \PHPMailer();
 		Twig_Autoloader::register();
-		$loader = new Twig_Loader_Filesystem('Views');
-		$this->twig = new Twig_Environment($loader, (ENVIRONMENT == 'production') ? array('cache' => 'cache') : array() );
+		$loader = new \Twig_Loader_Filesystem(DIR_VIEW);
+		$this->twig = new \Twig_Environment($loader, (ENVIRONMENT == 'production') ? array('cache' => 'cache') : array() );
+
 	}
 
 	/*-------------- FUNCTION TO LOAD VIEW -----------------*/
@@ -16,6 +18,8 @@ abstract class Controller
 		if( ! is_array($data) ){
 			return;
 		}
+		$data['BASEPATH'] = BASEPATH;
+		$data['BASEURL'] = BASEURL;
 
 		$template = $this->twig->loadTemplate($template);
 		$template->display($data);

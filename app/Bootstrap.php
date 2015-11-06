@@ -13,8 +13,6 @@ const USERNAME = 'root';
 const PASSWORD = '';
 
 const DS = DIRECTORY_SEPARATOR;
-const KEY = 'qwertyuiopASDFGHJKLzxcvbnm!@#$%^&*87654321';
-const ENVIRONMENT = 'development'; // OR production => live
 
 if( ENVIRONMENT == 'development' ){
 	error_reporting(-1);
@@ -26,18 +24,19 @@ else{
 
 $basepath = realpath( dirname( dirname(__FILE__) ) );
 $httpProt = isset($_SERVER['https']) ? 'https://' : 'http://';
-$baseurl = $httpProt.$_SERVER['HTTP_HOST'].'/'.substr( $_SERVER['REQUEST_URI'], strpos( $_SERVER['REQUEST_URI'], '/')+1, strrpos($_SERVER['REQUEST_URI'], '/') );
+$baseurl = $httpProt.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/')). '/';
 
 $basepath = $basepath.DS;
 $curPage = basename($_SERVER['SCRIPT_NAME'], '.php');
 
 define( 'BASEPATH', $basepath );
+define( 'APP_PATH', BASEPATH . 'app' .DS );
 define( 'BASEURL', $baseurl );
 define( 'CURRENT_PAGE', $curPage );
 
-const DIR_CONTROLLER = BASEPATH . 'Controllers' . DS;
-const DIR_MODEL = BASEPATH . 'Models' . DS;
-const DIR_VIEW = BASEPATH . 'Views' . DS;
+const DIR_CONTROLLER = APP_PATH . 'Controllers' . DS;
+const DIR_MODEL = APP_PATH . 'Models' . DS;
+const DIR_VIEW = APP_PATH . 'Views' . DS;
 /** ========== C O N S T A N T   E N D S   H E R E ============ **/
 
 /**
@@ -46,6 +45,7 @@ const DIR_VIEW = BASEPATH . 'Views' . DS;
  *
  */
 if( file_exists(BASEPATH . 'vendor'.DS.'autoload.php') ){
+	//require BASEPATH ."vendor/autoload.php";
 	require BASEPATH . 'vendor'.DS.'autoload.php';
 }
 else{
