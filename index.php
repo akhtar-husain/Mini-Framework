@@ -36,15 +36,15 @@ const KEY = 'qwertyuiopASDFGHJKLzxcvbnm!@#$%^&*87654321';
  *			 OR ENVIRONMENT => production
  * ---------------*/
 
-const ENVIRONMENT = ''; // OR production => live
+const ENVIRONMENT = 'development'; // OR production => live
 
 
 
 /*---------- SET DB DETAILS ---------------*/
 
-const HOSTNAME = 'localhost';
-const DBNAME = 'admin_panel';
-const USERNAME = 'root';
+const HOSTNAME = 'DBHOST';
+const DBNAME = 'DBNAME';
+const USERNAME = 'ROOT';
 const PASSWORD = '';
 
 
