@@ -1,16 +1,1 @@
-RewriteEngine On
-RewriteBase /admin-panel/
-ErrorDocument 404 http://localhost/admin-panel/?page=error
-#<IfModule mod_rewrite.c>
- #   <IfModule mod_negotiation.c>
- #       Options -MultiViews
- #   </IfModule>
- #   RewriteEngine On
-  #  RewriteBase /admin-panel/
-    # Redirect Trailing Slashes...
- #   RewriteRule ^(.*)/$ /$1 [L,R=301]
-    # Handle Front Controller...
-  #  RewriteCond %{REQUEST_FILENAME} !-d
-  #  RewriteCond %{REQUEST_FILENAME} !-f
-  #  RewriteRule ^(.*)$ $1.php [L]
-#</IfModule>
+
