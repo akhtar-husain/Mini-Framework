@@ -44,8 +44,8 @@ const ENVIRONMENT = 'development'; // OR production => live
 
 const HOSTNAME = 'DBHOST';
 const DBNAME = 'DBNAME';
-const USERNAME = 'ROOT';
-const PASSWORD = '';
+const USERNAME = 'DBUSER';
+const PASSWORD = 'DBPASSWORD';
 
 
 require_once "app/Bootstrap.php";
